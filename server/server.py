@@ -5,7 +5,7 @@ import time
 import base64
 
 BUFF_SIZE = 65536
-server_socket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #socket.SOCK_DGRAM
 server_socket.setsockopt(socket.SOL_SOCKET,socket.SO_RCVBUF,BUFF_SIZE)
 host_name = socket.gethostname()
 host_ip = socket.gethostbyname(host_name) # '192.168.1.102' socket.gethostbyname(host_name)
@@ -15,15 +15,20 @@ socket_address = (host_ip,port)
 server_socket.bind(socket_address)
 print('Listening at:',socket_address)
 
-vid = cv2.VideoCapture(1) #  replace 'rocket.mp4' with 0 for webcam
+vid = cv2.VideoCapture('./test1.mp4') #  replace 'rocket.mp4' with 0 for webcam
+print('vid opened')
 fps,st,frames_to_count,cnt = (0,0,20,0)
 
 while True:
+    print('a')
     msg,client_addr = server_socket.recvfrom(BUFF_SIZE)
+    print('b')
     print('GOT connection from ',client_addr)
     WIDTH=400
+    print(f'Vid opened: {vid.isOpened()}')
     while(vid.isOpened()):
         _,frame = vid.read()
+        print('c')
         frame = imutils.resize(frame,width=WIDTH)
         encoded,buffer = cv2.imencode('.jpg',frame,[cv2.IMWRITE_JPEG_QUALITY,80])
         message = base64.b64encode(buffer)

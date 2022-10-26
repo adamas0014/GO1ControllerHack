@@ -4,8 +4,12 @@ import numpy as np
 import time
 import base64
 
+import sys
+
+
+
 BUFF_SIZE = 65536
-client_socket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+client_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 client_socket.setsockopt(socket.SOL_SOCKET,socket.SO_RCVBUF,BUFF_SIZE)
 host_name = socket.gethostname()
 host_ip = socket.gethostbyname(host_name) #'192.168.1.102'  socket.gethostbyname(host_name)
@@ -22,6 +26,9 @@ while True:
     frame = cv2.imdecode(npdata,1)
     frame = cv2.putText(frame,'FPS: '+str(fps),(10,40),cv2.FONT_HERSHEY_SIMPLEX,0.7,(0,0,255),2)
     cv2.imshow("RECEIVING VIDEO",frame)
+    f = open('aa.data', 'w')
+    print(str(frame), file=f)
+    f.close()
     key = cv2.waitKey(1) & 0xFF
     if key == ord('q'):
         client_socket.close()
