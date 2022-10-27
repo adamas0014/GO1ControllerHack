@@ -41,7 +41,7 @@ def video_feed():
 def control():
     if(request.method == "POST"):
         data = json.loads(request.data.decode('utf-8'))
-        print(f'X: {data["x"]}, Y: {data["y"]}')
+        print(f'View: {data["view"]}, X: {data["x"]}, Y: {data["y"]}')
         return Response()
 
 

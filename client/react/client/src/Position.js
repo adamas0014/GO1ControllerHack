@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import axios from 'axios'
 
 const Form = (props) => {
-    const [form, setForm] = useState({x:'', y:''})
+    const [form, setForm] = useState({view: 'man', x: 512, y: 512})
     
 
     const handleSubmit=(event)=>{ 
@@ -40,6 +40,7 @@ const Form = (props) => {
     const moveStop = () => {
         setForm({x: 512, y: 512})
     }
+    
 
 
   return (
@@ -50,6 +51,8 @@ const Form = (props) => {
             <button name="lft" id="lft" onClick={turnLeft}>Left</button>
             <button name="rgt" id="rgt" onClick={turnRight}>Right</button>
             <button name="stp" id="stp" onClick={moveStop}>Stop</button>
+            <button name="viewMan" id="viewMan" onClick={() => setForm({view: 'man', x: 512, y: 512})}>Manual Mode</button>
+            <button name="viewAuto" id="viewAuto" onClick={() => setForm({view: 'auto', x: 512, y: 512})}>Automatic Mode</button>
            
        </form>
        </div>
