@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import axios from 'axios'
 
 const Form = (props) => {
-    const [form, setForm] = useState({view: 'man', x: 512, y: 512})
+    const [form, setForm] = useState({mode: 'man', cmd: 'S'})
     
 
     const handleSubmit=(event)=>{ 
@@ -17,7 +17,7 @@ const Form = (props) => {
         .catch((e) => {
             console.log("Error", e)
         })
-        setForm({x:'', y:''})
+        setForm({cmd: ''})
     }
     
     const handleChange = (event) => {
@@ -25,35 +25,21 @@ const Form = (props) => {
         setForm((prevState) =>({...prevState, [id]: value}))
     }
 
-    const moveFwd = () => {
-        setForm({x:768, y: 512})
-    }
-    const moveBwd = () => {
-        setForm({x:256, y: 512})
-    }
-    const turnLeft = () => {
-        setForm({x: 512, y: 256})
-    }    
-    const turnRight = () => {
-        setForm({x: 512, y: 768})
-    }
-    const moveStop = () => {
-        setForm({x: 512, y: 512})
-    }
-    
-
 
   return (
        <div>
        <form onSubmit={handleSubmit}>
-            <button name="fwd" id="fwd" onClick={moveFwd}>Forward</button>
-            <button name="bwd" id="bwd" onClick={moveBwd}>Backward</button>
-            <button name="lft" id="lft" onClick={turnLeft}>Left</button>
-            <button name="rgt" id="rgt" onClick={turnRight}>Right</button>
-            <button name="stp" id="stp" onClick={moveStop}>Stop</button>
-            <button name="viewMan" id="viewMan" onClick={() => setForm({view: 'man', x: 512, y: 512})}>Manual Mode</button>
-            <button name="viewAuto" id="viewAuto" onClick={() => setForm({view: 'auto', x: 512, y: 512})}>Automatic Mode</button>
-           
+            <button name="fwd" id="fwd" onClick={() => setForm({cmd: 'F'})}>Forward</button>
+            <button name="bwd" id="bwd" onClick={() => setForm({cmd: 'B'})}>Backward</button>
+            <button name="lft" id="lft" onClick={() => setForm({cmd: 'L'})}>Left</button>
+            <button name="rgt" id="rgt" onClick={() => setForm({cmd: 'R'})}>Right</button>
+            <button name="stp" id="stp" onClick={() => setForm({cmd: 'S'})}>Stop</button>
+            <button name="viewMan" id="viewMan" onClick={() => setForm({mode: 'man', cmd: 'S'})}>Manual Mode</button>
+            <button name="viewAuto" id="viewAuto" onClick={() => setForm({mode: 'auto', cmd: 'S'})}>Automatic Mode</button>
+            <button name="spd25" id="spd25" onClick={() => setForm({speed: 25, cmd: 'S'})}>Speed 25%</button>
+            <button name="spd50" id="spd50" onClick={() => setForm({speed: 50, cmd: 'S'})}>Speed 50%</button>
+            <button name="spd75" id="spd75" onClick={() => setForm({speed: 75, cmd: 'S'})}>Speed 75%</button>
+            <button name="spd100" id="spd100" onClick={() => setForm({speed: 100, cmd: 'S'})}>Speed 100%</button>
        </form>
        </div>
   )}
