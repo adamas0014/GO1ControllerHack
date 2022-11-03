@@ -1,0 +1,87 @@
+
+
+.commandForm {
+    form { 
+        button{
+
+            display: inline-block;
+            outline: 0;
+            cursor: pointer;
+            border: 2px solid #000;
+            border-radius: 3px;
+            color: #fff;
+            background: #000;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 6px;
+            padding: 12px 20px;
+            margin-top: 1vh;
+            margin-left: 1vw;
+            text-align:center;
+            transition-duration: .15s;
+            transition-property: all;
+            transition-timing-function: cubic-bezier(.4,0,.2,1);
+            &:active{
+                color: #000;
+                background: rgb(255, 218, 87);
+            }
+            
+        }
+        
+        
+        input{
+            width: 15vw;
+            border: 0;
+            outline: 0;
+            color: rgb(60, 66, 87);
+            background-color: rgb(255, 255, 255);
+            box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;
+            border-radius: 4px;
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 400;
+            padding: 4px 8px;
+            margin-left: 1vw;
+            margin-right: 1vw;
+            min-height: 28px;
+            vertical-align: middle;
+            transition: background-color .24s,box-shadow .24s;
+            transition-property: background-color, box-shadow;
+            transition-duration: 0.24s, 0.24s;
+            transition-timing-function: ease, ease;
+            transition-delay: 0s, 0s;
+        &:active{
+            box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(58 151 212 / 36%) 0px 0px 0px 4px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;
+        }
+        }
+    }
+
+
+    .past > textarea{
+    width: 15vw;
+    border: 0;
+    outline: 0;
+    color: rgb(60, 66, 87);
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;
+    border-radius: 4px;
+    font-size: 14px;
+    height: 10vh;
+    line-height: 20px;
+    font-weight: 400;
+    padding: 4px 8px;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    min-height: 28px;
+    vertical-align: middle;
+    transition: background-color .24s,box-shadow .24s;
+    transition-property: background-color, box-shadow;
+    transition-duration: 0.24s, 0.24s;
+    transition-timing-function: ease, ease;
+    transition-delay: 0s, 0s;
+    :focus{
+        box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(58 151 212 / 36%) 0px 0px 0px 4px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;
+    }
+    }
+
+}

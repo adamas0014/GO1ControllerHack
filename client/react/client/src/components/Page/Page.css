@@ -1,0 +1,9 @@
+.page {
+  margin: 0 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-self: flex-start;
+  align-content: flex-start;
+  background-color: black;
+}/*# sourceMappingURL=Page.css.map */

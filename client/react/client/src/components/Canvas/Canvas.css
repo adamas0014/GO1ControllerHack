@@ -1,0 +1,28 @@
+.canvas {
+  display: grid;
+  grid-template-columns: repeat(6, 13.667vw);
+  grid-template-rows: 60vh 10vh 10vh 10vh 30vh;
+  background-color: #FAF9F6;
+  justify-items: center;
+  align-items: center;
+}
+.canvas button {
+  display: inline-block;
+  outline: 0;
+  cursor: pointer;
+  border: 2px solid #000;
+  border-radius: 3px;
+  color: #000;
+  background: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  padding: 12px 20px;
+  text-align: center;
+  transition-duration: 0.15s;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+.canvas button:active {
+  background: rgb(251, 193, 245);
+}/*# sourceMappingURL=Canvas.css.map */
