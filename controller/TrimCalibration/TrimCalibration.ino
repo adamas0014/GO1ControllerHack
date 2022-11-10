@@ -21,17 +21,17 @@ void setup() {
   pinMode(Y_JOY, INPUT);
 
   Serial.begin(9600);
-
+  analogWriteResolution(12);
 }
 
 void loop() {
 
-  while (Serial.available()){
+  while (true){
     xJoy = analogRead(X_JOY);
     yJoy = analogRead(Y_JOY);
     
-    xMapped = map(xJoy, adcRangeInput[0], adcRangeInput[1], dacRangeOutput[0], dacRangeOutput[1]);
-    yMapped = map(yJoy, adcRangeInput[0], adcRangeInput[1], dacRangeOutput[0], dacRangeOutput[1]);
+    xMapped = map(xJoy, adcRangeInput[0], adcRangeInput[1], dacRangeOutput[0], dacRangeOutput[1]) - 1052;
+    yMapped = map(yJoy, adcRangeInput[0], adcRangeInput[1], dacRangeOutput[0], dacRangeOutput[1]) - 1052;
     
     //Clamp
     if(xMapped < dacRangeOutput[0]) xMapped = dacRangeOutput[0];
@@ -45,7 +45,7 @@ void loop() {
     analogWrite(X_OUT, xMapped);
     analogWrite(Y_OUT, yMapped);
     
-    delay(1000);
+    delay(50);
   
   }
 
