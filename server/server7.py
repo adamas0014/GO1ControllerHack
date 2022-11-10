@@ -5,6 +5,8 @@ from flask_cors import CORS
 import json
 import threading
 import queue
+import serial
+
 
 processVideoIn = queue.Queue()
 processVideoOut = queue.Queue()
@@ -34,30 +36,47 @@ def processVideo(inQueue, outQueue, returnThread):
 
 
 def hardwareControl(inQueue, outQueue, returnThread):
+    print("Inside hardwarecontrol")
+    ser = serial.Serial()
+    ser.baudrate = 9600
+    ser.port = 'COM4'
+    ser.open()
+    
+    while( not ser.is_open):
+        print("Trying to open Serial")
+        time.sleep(1000)
+        ser.open()
+    print("Serial opened")    
+
     print("hardwareControl has started")
     while returnThread:
         ins = inQueue.get()
-
+        print(ins)
         if( "cmd" in ins.keys()):
 
             if (ins["cmd"] == 'S'):
                 print("Stop")
+                ser.write('S\n'.encode('UTF-8'))
                 outQueue.put("Stop OK")
 
             elif(ins["cmd"] == 'F'):
                 print("Fwd")
+                ser.write('F\n'.encode('UTF-8'))
                 outQueue.put("Fwd OK")
 
             elif (ins["cmd"] == 'B'):
                 print("Bwd")
+                ser.write('B\n'.encode('UTF-8'))
                 outQueue.put("Bwd OK")
 
             elif (ins["cmd"] == 'L'):
                 print("left")
+                ser.write('L\n'.encode('UTF-8'))
                 outQueue.put("Left OK")
 
             elif (ins["cmd"] == 'R'):
                 print("Right")
+                ser.write('R\n'.encode('UTF-8'))
                 outQueue.put("Right OK")
 
         if( "speed" in ins.keys()):
@@ -68,6 +87,7 @@ def hardwareControl(inQueue, outQueue, returnThread):
             print(f'Changing mode to: {ins["mode"]}')
             outQueue.put(f'{ins["mode"]} OK')
 
+    ser.close()
     print("Leaving hardwareControl()")
 
 
@@ -153,7 +173,7 @@ def control():
     if(request.method == "POST"):
         data = json.loads(request.data.decode('utf-8'))
         hardwareControlIn.put(data)
-        #print(f'View: {data["view"]}, X: {data["x"]}, Y: {data["y"]}')
+        print(data)
         resp = hardwareControlOut.get()
         return Response(resp)
 
