@@ -39,7 +39,7 @@ def hardwareControl(inQueue, outQueue, returnThread):
     print("Inside hardwarecontrol")
     ser = serial.Serial()
     ser.baudrate = 9600
-    ser.port = 'COM4'
+    ser.port = 'COM7'
     ser.open()
     
     while( not ser.is_open):
@@ -130,8 +130,8 @@ CORS(app)
 
 class VideoCamera(object):
     def __init__(self):
-        self.video = cv2.VideoCapture("C:\\Users\\adama\\OneDrive\\Documents\\GitHub\\GO1ControllerHack\\server\\test1.mp4")    #"C:\\Users\\adama\\OneDrive\\Documents\\GitHub\\GO1ControllerHack\\server\\test1.mp4"
-        self.coverFrame = cv2.imread("C:\\Users\\adama\\OneDrive\\Documents\\GitHub\\GO1ControllerHack\\server\\done.jpg")
+        self.video = cv2.VideoCapture(0)    #"C:\\Users\\adama\\OneDrive\\Documents\\GitHub\\GO1ControllerHack\\server\\test1.mp4"
+        self.coverFrame = cv2.imread("C:\\Users\\Adam\\Documents\\GitHub\\Expense-Tracker-Refactor\\GO1ControllerHack\\server\\done.jpg")
 
     def __del__(self):
         self.video.release() 
