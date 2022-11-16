@@ -1,1 +1,50 @@
-/*# sourceMappingURL=controlPad.css.map */
+.controlPad {
+  display: grid;
+  grid-template-columns: repeat(5, 20vw) 25vw;
+  grid-template-rows: 10ch 10vh 10vh 10vh;
+  width: 100%;
+  justify-items: center;
+  align-items: center;
+  align-items: center;
+  justify-content: center;
+}
+.controlPad div button .primary {
+  display: inline-block;
+  outline: 0;
+  cursor: pointer;
+  border: 2px solid #000;
+  border-radius: 8px;
+  color: #000;
+  background: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  padding: 12px 20px;
+  text-align: center;
+  transition-duration: 0.15s;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+.controlPad div button .primary:active {
+  background: rgb(251, 193, 245);
+}
+.controlPad div button .secondary {
+  display: inline-block;
+  outline: 0;
+  cursor: pointer;
+  border: 2px solid #000;
+  border-radius: 6px;
+  color: #fff;
+  background: #000;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  padding: 12px 20px;
+  text-align: center;
+  transition-duration: 0.15s;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+.controlPad div button .secondary:active {
+  background: rgb(251, 193, 245);
+}/*# sourceMappingURL=controlPad.css.map */

@@ -1,31 +1,28 @@
-.modeContainer {
-  display: flex;
-  flex-direction: column;
-}
-.modeContainer button {
+.navButton button {
   display: flex;
   flex-direction: row;
   background-color: white;
   border: 0px;
   text-align: left;
   height: 7vh;
+  width: 100%;
   font-size: 11pt;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   padding-left: 1vw;
 }
-.modeContainer button:hover {
+.navButton button:hover {
   border: 5px;
   background-color: whitesmoke;
 }
-.modeContainer button:active {
+.navButton button:active {
   background-color: #eeeeee;
 }
-.modeContainer button img {
+.navButton button img {
   margin-top: auto;
   margin-bottom: auto;
   height: 4vh;
 }
-.modeContainer button .title {
+.navButton button .title {
   padding-top: 2.2vh;
   padding-left: 0.5vw;
-}/*# sourceMappingURL=modeSwitcher.css.map */
+}/*# sourceMappingURL=navButton.css.map */

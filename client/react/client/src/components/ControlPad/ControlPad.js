@@ -1,5 +1,9 @@
 import React from 'react'
 import axios from 'axios'
+import SpeedForm from '../SpeedForm/SpeedForm'
+import './controlPad.css'
+
+
 
 const ControlPad = () => {
     //const [form, setForm] = useState({mode: 'man', cmd: 'S'})
@@ -22,21 +26,18 @@ const ControlPad = () => {
 
 
     return<>
-
-        <div>&nbsp;</div>
-        <div style={{gridRow: "span 3"}}><button className="secondary" onClick={() => {console.log("LEFT"); SendToServer({cmd: "L"})}}>Left</button></div>
-        <div style={{gridColumn: "span 2"}}> <button onClick={() => {console.log("FORWARD"); SendToServer({cmd: "F"})}}>Forward</button> </div>
-        <div style={{gridRow: "span 3"}}><button onClick={() => {console.log("RIGHT"); SendToServer({cmd: "R"})}}>Right</button></div>
-        <div>&nbsp;</div>
-
-        <div>&nbsp;</div>
-        <div style={{gridColumn: "span 2"}}> <button onClick={() => {console.log("STOP"); SendToServer({cmd: "S"})}}>Stop</button> </div>
-        <div>&nbsp;</div>
-
-        <div>&nbsp;</div>
-        <div style={{gridColumn: "span 2"}}> <button onClick={() => {console.log("BACKWARD"); SendToServer({cmd: "B"})}}>Backward</button> </div>
-        <div>&nbsp;</div>
-    
+        <div className="controlPad">
+            <div style={{gridRow: 'span 3'}}></div>
+            <div style={{gridRow: 'span 3', justifySelf: "end"}}><button className="primary" onClick={() => {console.log("LEFT"); SendToServer({cmd: "L"})}}>Left</button></div>
+            <div> <button className="primary" onClick={() => {console.log("FORWARD"); SendToServer({cmd: "F"})}}>Forward</button> </div>
+            <div style={{gridRow: 'span 3', justifySelf: "start"}}><button className="primary" onClick={() => {console.log("RIGHT"); SendToServer({cmd: "R"})}}>Right</button></div>
+            <div style={{gridRow: 'span 3', alignSelf: "start"}}><SpeedForm /></div>
+            <div></div>
+            <div style={{gridColumn: "span 1"}}> <button className="secondary" onClick={() => {console.log("STOP"); SendToServer({cmd: "S"})}}>Stop</button> </div>
+            <div></div>
+            <div style={{gridColumn: "span 1"}}> <button className="primary" onClick={() => {console.log("BACKWARD"); SendToServer({cmd: "B"})}}>Backward</button> </div>
+         
+        </div>
     </>
 }
 

@@ -1,0 +1,65 @@
+
+
+.controlPad{
+    display: grid;
+    grid-template-columns: repeat(5, 20vw) 25vw;
+    grid-template-rows: 10ch 10vh 10vh 10vh;
+    width: 100%;
+    justify-items: center;
+    align-items: center;
+    align-items: center;
+    justify-content: center;
+    
+    div{
+        
+
+        button .primary{
+            display: inline-block;
+            outline: 0;
+            cursor: pointer;
+            border: 2px solid #000;
+            border-radius: 8px;
+            color: #000;
+            background: #fff;
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 28px;
+            padding: 12px 20px;
+            text-align:center;
+            transition-duration: .15s;
+            transition-property: all;
+            transition-timing-function: cubic-bezier(.4,0,.2,1);
+    
+    
+            &:active{
+                background: rgb(251, 193, 245);
+            }
+            
+        }
+
+        button .secondary{
+            display: inline-block;
+            outline: 0;
+            cursor: pointer;
+            border: 2px solid #000;
+            border-radius: 6px;
+            color: #fff;
+            background: #000;
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 28px;
+            padding: 12px 20px;
+            text-align:center;
+            transition-duration: .15s;
+            transition-property: all;
+            transition-timing-function: cubic-bezier(.4,0,.2,1);
+    
+    
+            &:active{
+                background: rgb(251, 193, 245);
+            }
+            
+        }
+    }
+    
+}

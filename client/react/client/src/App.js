@@ -6,6 +6,8 @@ import Canvas from './components/Canvas/Canvas'
 import SideNav from './components/SideNav/SideNav'
 import CommandForm from './components/CommandForm/CommandForm'
 import ControlPad from './components/ControlPad/ControlPad';
+import ModeSwitcher from './components/ModeSwitcher/ModeSwitcher';
+import NavButton from './components/NavButton/NavButton';
 
 
 function App() {
@@ -23,9 +25,12 @@ function App() {
             GO1 Hack Studio
         </div>
         <CommandForm />
-        <div><p>hello</p></div>
-        <div><p>hello</p></div>
-        <div><p>hello</p></div>
+        <ModeSwitcher />
+        <div style={{height: "2vh"}}></div>
+        <NavButton name="Project Information" />
+        <NavButton name="Project Website" />
+        <NavButton name="GitHub" />
+
       </SideNav>
       <Canvas>
         <div style={{gridColumn: "span 6", paddingTop:"3vh", marginLeft: "auto", marginRight: "auto"}}>

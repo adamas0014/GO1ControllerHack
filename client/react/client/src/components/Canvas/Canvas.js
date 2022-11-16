@@ -3,7 +3,7 @@ import './Canvas.css'
 
 
 const Canvas = ({children}) => {
-    return <div className="canvas">{children}</div>
+    return <div className="canvas"><div>&nbsp;</div>{children}</div>
 }
 
 

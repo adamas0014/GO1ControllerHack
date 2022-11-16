@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"name": "TrimCalibration",
+			"path": "TrimCalibration"
+		}
+	],
+	"settings": {}
+}

@@ -1,7 +1,7 @@
 .canvas {
   display: grid;
-  grid-template-columns: repeat(6, 13.667vw);
-  grid-template-rows: 60vh 10vh 10vh 10vh 30vh;
+  grid-template-columns: 82vw;
+  grid-template-rows: 30vh 30vh 40vh;
   background-color: #FAF9F6;
   justify-items: center;
   align-items: center;
@@ -25,4 +25,8 @@
 }
 .canvas button:active {
   background: rgb(251, 193, 245);
+}
+
+html {
+  background-color: #1e1e2c;
 }/*# sourceMappingURL=Canvas.css.map */

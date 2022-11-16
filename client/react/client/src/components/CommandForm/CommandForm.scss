@@ -22,8 +22,9 @@
             transition-property: all;
             transition-timing-function: cubic-bezier(.4,0,.2,1);
             &:active{
-                color: #000;
-                background: rgb(255, 218, 87);
+                color: black;
+                background: #fff;
+                border-color: black;
             }
             
         }

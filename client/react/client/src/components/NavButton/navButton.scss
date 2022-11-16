@@ -1,16 +1,12 @@
-
-
-.modeContainer {
-    display: flex;
-    flex-direction: column;
-
-    button {
+.navButton{
+    button{
         display: flex;
         flex-direction: row;
         background-color: white;
         border: 0px;
         text-align: left;
         height: 7vh;
+        width: 100%;
         font-size: 11pt;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
         padding-left: 1vw;
@@ -33,9 +29,4 @@
             padding-left: .5vw;;
         }
     }
-    
-
-
-
 }
-

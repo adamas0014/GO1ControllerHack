@@ -1,48 +1,151 @@
-# This is server code to send video frames over UDP
-import cv2, imutils, socket
-import numpy as np
+import sys
+import argparse
+from flask import Flask, render_template, Response, request
+import cv2
 import time
-import base64
+from flask_cors import CORS
+import json
+import threading
+import queue
+import serial
+from ConfigParser import ConfigParser
 
-BUFF_SIZE = 65536
-server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #socket.SOCK_DGRAM
-server_socket.setsockopt(socket.SOL_SOCKET,socket.SO_RCVBUF,BUFF_SIZE)
-host_name = socket.gethostname()
-host_ip = socket.gethostbyname(host_name) # '192.168.1.102' socket.gethostbyname(host_name)
-print(host_ip)
-port = 9999
-socket_address = (host_ip,port)
-server_socket.bind(socket_address)
-print('Listening at:',socket_address)
 
-vid = cv2.VideoCapture('./test1.mp4') #  replace 'rocket.mp4' with 0 for webcam
-print('vid opened')
-fps,st,frames_to_count,cnt = (0,0,20,0)
+parser = argparse.ArgumentParser(description="Start the GO1 Hack Studio server")
+group = parser.add_mutually_exclusive_group()
+group.add_argument('-c', '--config', type=str, default="_config.json", required=False, help="Use a non-default configuration script")
+group.add_argument('-a', '--autostart', type=bool, required=True, help="Decide whether to load server in CLI mode")
+group.add_argument('-i', '--ipaddress', type=str, default=False, required=False, help="Use a non-default ip address for the quadruped")
+group.add_argument('-v', '--verbose', type=bool, default=False, required=False, help="Print additional server state info")
+args = parser.parse_args()
 
-while True:
-    print('a')
-    msg,client_addr = server_socket.recvfrom(BUFF_SIZE)
-    print('b')
-    print('GOT connection from ',client_addr)
-    WIDTH=400
-    print(f'Vid opened: {vid.isOpened()}')
-    while(vid.isOpened()):
-        _,frame = vid.read()
-        print('c')
-        frame = imutils.resize(frame,width=WIDTH)
-        encoded,buffer = cv2.imencode('.jpg',frame,[cv2.IMWRITE_JPEG_QUALITY,80])
-        message = base64.b64encode(buffer)
-        server_socket.sendto(message,client_addr)
-        frame = cv2.putText(frame,'FPS: '+str(fps),(10,40),cv2.FONT_HERSHEY_SIMPLEX,0.7,(0,0,255),2)
-        cv2.imshow('TRANSMITTING VIDEO',frame)
-        key = cv2.waitKey(1) & 0xFF
-        if key == ord('q'):
-            server_socket.close()
-            break
-        if cnt == frames_to_count:
-            try:
-                fps = round(frames_to_count/(time.time()-st))
-                st=time.time()
-                cnt=0
-            except:
-                pass
+class Server():
+    def __init__(self, flaskApp, mqttClient, commandParser, videoSource):
+        self._configParser = ConfigParser(args.config)
+        self._app = flaskApp
+        self._mqttClient = mqttClient
+        self._commandParser = commandParser
+        self._videoSource = videoSource
+        self._processVideo = None
+        self._t = dict()
+    
+    def createEventThread(self, name: str, fn: function, eventList: list):
+        if(self._t[name] != None):
+            print("!Error, thread already exists")
+            return False
+
+        try:
+            returnEvent = threading.Event()
+            events = dict()
+
+            if( len(eventList) > 0 ):
+                for e in eventList:
+                    events({str(e): threading.Event()})
+        
+            queueIn = queue.Queue()
+            queueOut = queue.Queue()
+            thread = threading.Thread(target=fn, args=(queueIn, queueOut, returnEvent, events))
+            
+            self._t[name] = dict({
+                "return": returnEvent,
+                "qIn": queueIn,
+                "qOut": queueOut,
+                "thread": thread,
+                "events": events
+            })
+            
+        except:
+            return None
+
+        return self._t[name]
+
+    #Delete once createEventThread works
+    def createThread(self, name: str, fn: function):
+        if(self._t[name] != None):
+            print("!Error, thread already exists")
+            return False
+
+        returnEvent = threading.Event()
+        queueIn = queue.Queue()
+        queueOut = queue.Queue()
+        thread = threading.Thread(target=fn, args=(queueIn, queueOut, returnEvent))
+
+        self._t[name] = dict({
+                "return": returnEvent,
+                "qIn": queueIn,
+                "qOut": queueOut,
+                "thread": thread
+            })
+            
+        return True
+
+    def startAllThreads(self):
+        for key, val in self._t.items():
+            val["thread"].start()
+    
+    def returnAllThreads(self):
+        for key, val in self._t.items():
+            val["return"].set()
+
+    def initialize(self):
+        if(args.autostart):
+            #if its autostart, we want to thread the flask server
+            app.debug = False
+            app.use_reloader=False
+
+            def flaskServer(queueIn, queueOut, returnEvent, events):
+                if(not returnEvent):
+                    return
+                
+            self.createEventThread(lambda: while(returnThread):  )
+    
+    def start(self):
+        pass
+
+    def loadConfig(self):
+        self._config = self._configParser.load()
+        print(str(self._config))
+
+    def menu(self):
+       
+        print(" \n \
+            start - start server    \n \
+            stop - stop server      \n \
+            \n \
+            ")
+        choice = input()
+        if(choice == "start"):
+            self.createThread("ProcessVideo", )
+            self.createThread("CommandParser", )
+            self.startAllThreads()
+            self._app.run(host='0.0.0.0', port=5000, threaded=True, use_reloader=False)
+        elif(choice == "stop"):
+            print("Stopping threads...")
+            self.returnAllThreads()
+            print("Threads stopped")
+                
+    
+    def spin(self):
+        if(not args.autostart):
+            while(True):
+                self.menu()
+            
+        else:
+            
+
+
+
+def main():
+
+    return
+
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    main()
