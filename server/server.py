@@ -15,7 +15,6 @@ parser = argparse.ArgumentParser(description="Start the GO1 Hack Studio server")
 group = parser.add_mutually_exclusive_group()
 group.add_argument('-c', '--config', type=str, default="_config.json", required=False, help="Use a non-default configuration script")
 group.add_argument('-a', '--autostart', type=bool, required=True, help="Decide whether to load server in CLI mode")
-group.add_argument('-i', '--ipaddress', type=str, default=False, required=False, help="Use a non-default ip address for the quadruped")
 group.add_argument('-v', '--verbose', type=bool, default=False, required=False, help="Print additional server state info")
 args = parser.parse_args()
 
@@ -87,20 +86,58 @@ class Server():
         for key, val in self._t.items():
             val["return"].set()
 
-    def initialize(self):
-        if(args.autostart):
-            #if its autostart, we want to thread the flask server
-            app.debug = False
-            app.use_reloader=False
 
-            def flaskServer(queueIn, queueOut, returnEvent, events):
-                if(not returnEvent):
-                    return
-                
-            self.createEventThread(lambda: while(returnThread):  )
+    #
+    #   THREADED PROCESSES
+    #
+
+    def flaskServer(self, queueIn, queueOut, returnEvent, events):
+        if(not returnEvent):
+            return
+        
+    def videoProcessing(self, queueIn, queueOut, returnEvent, events):
+        return
+
+    def hardwareControl(self, queueIn, queueOut, returnEvent, events):
+        return
     
+
+
+    def initialize(self):
+        try:
+            self.loadConfig()
+        except:
+            if(args.verbose) : print("! - Failed to load configuration file")
+
+        try:
+            if(args.autostart):
+                #if its autostart, we want to thread the flask server
+                self._app.debug = False
+                self._use_reloader = False   
+                self.createEventThread("Flask", self.flaskServer, [None])
+            
+            else:
+                self.flaskServer(None, None, None, None) #lol none none none 
+        except:
+            if args.verbose: print("! - An error occurred when initializing the flask server")
+        
+        try:
+            self.createEventThread("VideoProcessing", self.videoProcessing, ["Preprocess"])
+        except:
+            if args.verbose: print("! - An error occurred when initializing the preprocess thread")
+        
+        try:
+            self.createEventThread("HardwareControl", self.hardwareControl, ["Ramp"])
+        except:
+            if args.verbose: print("! - An error occurred when initializing the hardware control thread")
+      
+
     def start(self):
-        pass
+        try:
+            self.startAllThreads()
+        except:
+            if(args.verbose): print("! - Some threads failed to start")
+
 
     def loadConfig(self):
         self._config = self._configParser.load()
@@ -136,7 +173,6 @@ class Server():
 
 
 def main():
-
     return
 
 
