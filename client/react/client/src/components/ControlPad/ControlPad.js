@@ -28,14 +28,14 @@ const ControlPad = () => {
     return<>
         <div className="controlPad">
             <div style={{gridRow: 'span 3'}}></div>
-            <div style={{gridRow: 'span 3', justifySelf: "end"}}><button className="primary" onClick={() => {console.log("LEFT"); SendToServer({cmd: "L"})}}>Left</button></div>
-            <div> <button className="primary" onClick={() => {console.log("FORWARD"); SendToServer({cmd: "F"})}}>Forward</button> </div>
-            <div style={{gridRow: 'span 3', justifySelf: "start"}}><button className="primary" onClick={() => {console.log("RIGHT"); SendToServer({cmd: "R"})}}>Right</button></div>
+            <div style={{gridRow: 'span 3', justifySelf: "end"}}><button className="primary" onClick={() => {console.log("LEFT"); SendToServer({CMD: "L"})}}>Left</button></div>
+            <div> <button className="primary" onClick={() => {console.log("FORWARD"); SendToServer({CMD: "F"})}}>Forward</button> </div>
+            <div style={{gridRow: 'span 3', justifySelf: "start"}}><button className="primary" onClick={() => {console.log("RIGHT"); SendToServer({CMD: "R"})}}>Right</button></div>
             <div style={{gridRow: 'span 3', alignSelf: "start"}}><SpeedForm /></div>
             <div></div>
-            <div style={{gridColumn: "span 1"}}> <button className="secondary" onClick={() => {console.log("STOP"); SendToServer({cmd: "S"})}}>Stop</button> </div>
+            <div style={{gridColumn: "span 1"}}> <button className="secondary" onClick={() => {console.log("STOP"); SendToServer({CMD: "S"})}}>Stop</button> </div>
             <div></div>
-            <div style={{gridColumn: "span 1"}}> <button className="primary" onClick={() => {console.log("BACKWARD"); SendToServer({cmd: "B"})}}>Backward</button> </div>
+            <div style={{gridColumn: "span 1"}}> <button className="primary" onClick={() => {console.log("BACKWARD"); SendToServer({CMD: "B"})}}>Backward</button> </div>
          
         </div>
     </>
